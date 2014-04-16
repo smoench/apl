@@ -1,0 +1,30 @@
+{
+    "name": "apl/apl",
+    "description": "application layer libary",
+    "type": "library",
+    "keywords": ["application", "layer", "event", "dispatching"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Mönch",
+            "email": "simonmoench@gmail.com",
+            "homepage": "http://smoench.de",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/event-dispatcher": "~2.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~3.7"
+    },
+    "autoload": {
+        "psr-0": {
+            "APL\\": "src/"
+        },
+        "psr-4": {
+            "APL\\": "src/"
+        }
+    }
+}
