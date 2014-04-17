@@ -84,7 +84,7 @@ class Dispatcher implements DispatcherInterface
         }
 
         $event = new Event\TerminateEvent($response);
-        $this->eventDispatcher->dispatch(Event\Events::EXCEPTION, $event);
+        $this->eventDispatcher->dispatch(Event\Events::TERMINATE, $event);
         return $event->getResponse();
     }
 
