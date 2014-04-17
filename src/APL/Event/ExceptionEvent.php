@@ -11,6 +11,7 @@
 namespace APL\Event;
 
 use APL\Command;
+use APL\Response;
 
 class ExceptionEvent
 {
@@ -23,14 +24,19 @@ class ExceptionEvent
     /** @var Response|null */
     private $response = null;
 
+    /**
+     *
+     * @param Command $command
+     * @param \Exception $exception
+     */
     public function __construct(Command $command, \Exception $exception)
     {
-        $this->command = $command;
+        $this->command   = $command;
         $this->exception = $exception;
     }
 
     /**
-     * 
+     *
      * @return Command
      */
     public function getCommand()
@@ -39,7 +45,7 @@ class ExceptionEvent
     }
 
     /**
-     * 
+     *
      * @return \Exception
      */
     public function getException()
@@ -48,7 +54,7 @@ class ExceptionEvent
     }
 
     /**
-     * 
+     *
      * @return Response|null
      */
     public function getResponse()
@@ -57,10 +63,10 @@ class ExceptionEvent
     }
 
     /**
-     * 
-     * @param array $response
+     *
+     * @param Response $response
      */
-    public function setResponse($response)
+    public function setResponse(Response $response)
     {
         $this->response = $response;
     }

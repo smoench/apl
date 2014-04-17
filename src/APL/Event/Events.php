@@ -15,4 +15,5 @@ final class Events
     const PRE_COMMAND = "apl.event.pre_command";
     const POST_COMMAND = "apl.event.post_command";
     const EXCEPTION = "apl.event.exception";
+    const TERMINATE = "apl.event.terminate";
 }
