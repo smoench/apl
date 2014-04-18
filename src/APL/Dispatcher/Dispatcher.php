@@ -41,7 +41,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param string $commandClass
+     * @param string  $commandClass
      * @param UseCase $useCase
      */
     public function registerCommand($commandClass, UseCase $useCase)
@@ -51,7 +51,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param Command $command
+     * @param  Command    $command
      * @return Response
      * @throws \Exception
      */
@@ -85,12 +85,13 @@ class Dispatcher implements DispatcherInterface
 
         $event = new Event\TerminateEvent($response);
         $this->eventDispatcher->dispatch(Event\Events::TERMINATE, $event);
+
         return $event->getResponse();
     }
 
     /**
      *
-     * @param Command $command
+     * @param  Command $command
      * @return UseCase
      */
     protected function resolveUseCase(Command $command)
@@ -101,6 +102,6 @@ class Dispatcher implements DispatcherInterface
             throw new Exception\UseCaseNotFoundException($command);
         }
 
-        return  $this->useCases[$class];
+        return $this->useCases[$class];
     }
 }

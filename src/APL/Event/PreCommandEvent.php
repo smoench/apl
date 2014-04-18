@@ -18,7 +18,7 @@ class PreCommandEvent
     private $command;
 
     /**
-     * 
+     *
      * @param Command $command
      */
     public function __construct(Command $command)
@@ -27,7 +27,7 @@ class PreCommandEvent
     }
 
     /**
-     * 
+     *
      * @return Command
      */
     public function getCommand()

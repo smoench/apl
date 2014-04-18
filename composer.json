@@ -1,5 +1,5 @@
 {
-    "name": "apl/apl",
+    "name": "smoench/apl",
     "description": "application layer libary",
     "type": "library",
     "keywords": ["application", "layer", "event", "dispatching"],
@@ -21,9 +21,6 @@
     },
     "autoload": {
         "psr-0": {
-            "APL\\": "src/"
-        },
-        "psr-4": {
             "APL\\": "src/"
         }
     }

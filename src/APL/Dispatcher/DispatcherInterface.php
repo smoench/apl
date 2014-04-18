@@ -22,7 +22,7 @@ interface DispatcherInterface
 
     /**
      *
-     * @param Command $command
+     * @param  Command  $command
      * @return Response
      */
     public function execute(Command $command);

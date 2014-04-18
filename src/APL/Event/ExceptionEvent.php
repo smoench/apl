@@ -26,7 +26,7 @@ class ExceptionEvent
 
     /**
      *
-     * @param Command $command
+     * @param Command    $command
      * @param \Exception $exception
      */
     public function __construct(Command $command, \Exception $exception)

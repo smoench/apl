@@ -14,7 +14,7 @@ interface UseCase
 {
 
     /**
-     * @param Command $command
+     * @param  Command $command
      * @return array
      */
     public function run(Command $command);

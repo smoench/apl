@@ -12,5 +12,5 @@ namespace APL;
 
 interface Command
 {
-    
+
 }

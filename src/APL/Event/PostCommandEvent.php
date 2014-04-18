@@ -22,8 +22,8 @@ class PostCommandEvent
     private $response;
 
     /**
-     * 
-     * @param Command $command
+     *
+     * @param Command  $command
      * @param Response $response
      */
     public function __construct(Command $command, Response $response)
@@ -33,7 +33,7 @@ class PostCommandEvent
     }
 
     /**
-     * 
+     *
      * @return Command
      */
     public function getCommand()
@@ -42,7 +42,7 @@ class PostCommandEvent
     }
 
     /**
-     * 
+     *
      * @return Response
      */
     public function getResponse()
