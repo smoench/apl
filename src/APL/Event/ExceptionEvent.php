@@ -12,8 +12,9 @@ namespace APL\Event;
 
 use APL\Command;
 use APL\Response;
+use Symfony\Component\EventDispatcher\Event;
 
-class ExceptionEvent
+class ExceptionEvent extends Event
 {
     /** @var Command */
     private $command;

@@ -11,12 +11,13 @@
 namespace APL\Event;
 
 use APL\Response;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  *
  * @author David Badura <d.a.badura@gmail.com>
  */
-class TerminateEvent
+class TerminateEvent extends Event
 {
     /** @var Response */
     private $response;

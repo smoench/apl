@@ -11,8 +11,9 @@
 namespace APL\Event;
 
 use APL\Command;
+use Symfony\Component\EventDispatcher\Event;
 
-class PreCommandEvent
+class PreCommandEvent extends Event
 {
     /** @var Command */
     private $command;
