@@ -10,7 +10,6 @@
 
 namespace APL;
 
-class Response
+interface Response
 {
-    //put your code here
 }
