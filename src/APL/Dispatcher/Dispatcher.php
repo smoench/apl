@@ -11,10 +11,10 @@
 namespace APL\Dispatcher;
 
 use APL\Command;
-use APL\UseCase;
-use APL\Response;
 use APL\Event;
 use APL\Exception;
+use APL\Response;
+use APL\UseCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -51,19 +51,18 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param  Command    $command
+     * @param  Command $command
      * @return Response
      * @throws \Exception
      */
     public function execute(Command $command)
     {
         try {
-
             $event = new Event\PreCommandEvent($command);
             $this->eventDispatcher->dispatch(Event\Events::PRE_COMMAND, $event);
-            $command = $event->getCommand();
 
-            $useCase = $this->resolveUseCase($command);
+            $command  = $event->getCommand();
+            $useCase  = $this->resolveUseCase($command);
             $response = $useCase->run($command);
 
             if (!$response instanceof Response) {
@@ -73,12 +72,11 @@ class Dispatcher implements DispatcherInterface
             $event = new Event\PostCommandEvent($command, $response);
             $this->eventDispatcher->dispatch(Event\Events::POST_COMMAND, $event);
             $response = $event->getResponse();
-
         } catch (\Exception $exception) {
             $event = new Event\ExceptionEvent($command, $exception);
             $this->eventDispatcher->dispatch(Event\Events::EXCEPTION, $event);
 
-            if (!$response = $event->getResponse()) {
+            if (!($response = $event->getResponse())) {
                 throw $exception;
             }
         }
@@ -92,6 +90,7 @@ class Dispatcher implements DispatcherInterface
     /**
      *
      * @param  Command $command
+     * @throws \APL\Exception\UseCaseNotFoundException
      * @return UseCase
      */
     protected function resolveUseCase(Command $command)
