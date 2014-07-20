@@ -41,7 +41,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param string  $commandClass
+     * @param string $commandClass
      * @param UseCase $useCase
      */
     public function registerCommand($commandClass, UseCase $useCase)

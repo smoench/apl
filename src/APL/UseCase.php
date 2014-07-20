@@ -10,12 +10,14 @@
 
 namespace APL;
 
+/**
+ *
+ */
 interface UseCase
 {
-
     /**
      * @param  Command $command
-     * @return array
+     * @return Response
      */
     public function run(Command $command);
 }

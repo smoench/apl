@@ -19,7 +19,7 @@ interface Policy
 {
     /**
      *
-     * @param Command $command
+     * @param  Command $command
      * @return mixed
      */
     public function check(Command $command);
