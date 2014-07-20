@@ -12,7 +12,15 @@ namespace APL\Security;
 
 use APL\Command;
 
+/**
+ *
+ */
 interface Policy
 {
-    public function check(SecurityContextInterface $context, Command $command);
+    /**
+     *
+     * @param Command $command
+     * @return mixed
+     */
+    public function check(Command $command);
 }

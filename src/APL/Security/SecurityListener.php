@@ -11,31 +11,21 @@
 namespace APL\Security;
 
 use APL\Event\PreCommandEvent;
-use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * 
+ *
  */
 class SecurityListener
 {
-    /** @var SecurityContextInterface */
-    protected $context;
-
-    /** @var Policy[] */
+    /**
+     *
+     * @var Policy[]
+     */
     protected $polices = array();
 
     /**
-     * 
-     * @param \Symfony\Component\Security\Core\SecurityContextInterface $context
-     */
-    public function __construct(SecurityContextInterface $context)
-    {
-        $this->context = $context;
-    }
-
-    /**
-     * 
-     * @param \APL\Policy\Policy $policy
+     *
+     * @param Policy $policy
      */
     public function addPolicy(Policy $policy)
     {
@@ -43,13 +33,13 @@ class SecurityListener
     }
 
     /**
-     * 
+     *
      * @param \APL\Event\PreCommandEvent $event
      */
     public function preCommand(PreCommandEvent $event)
     {
         foreach ($this->polices as $policy) {
-            $policy->check($this->context, $event->getCommand());
+            $policy->check($event->getCommand());
         }
     }
 }
