@@ -11,9 +11,12 @@
 namespace APL\Security;
 
 use APL\Event\PreCommandEvent;
+use APL\Exception\SecurityException;
 
 /**
  *
+ * @author Simon Mönch
+ * @author David Badura <d.a.badura@gmail.com>
  */
 class SecurityListener
 {
@@ -38,8 +41,14 @@ class SecurityListener
      */
     public function preCommand(PreCommandEvent $event)
     {
+        $command = $event->getCommand();
+
         foreach ($this->polices as $policy) {
-            $policy->check($event->getCommand());
+            if ($policy->check($command)) {
+                continue;
+            }
+
+            throw new SecurityException($command, $policy);
         }
     }
 }
