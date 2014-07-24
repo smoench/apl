@@ -15,6 +15,7 @@ use APL\Exception;
 use APL\Command\CommandInterface;
 use APL\Response\ResponseInterface;
 use APL\UseCase\UseCaseInterface;
+use APL\UseCase\UseCaseSubscriber;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -24,10 +25,16 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  */
 class Dispatcher implements DispatcherInterface
 {
-    /** @var $eventDispatcher */
+    /**
+     *
+     * @var $eventDispatcher
+     */
     private $eventDispatcher;
 
-    /** @var UseCaseInterface[] */
+    /**
+     *
+     * @var UseCaseInterface[]
+     */
     private $useCases = array();
 
     /**
@@ -46,14 +53,29 @@ class Dispatcher implements DispatcherInterface
      */
     public function registerCommand($commandClass, UseCaseInterface $useCase)
     {
+        if (isset($this->useCases[$commandClass])) {
+            throw new Exception\DuplicateUseCaseException($useCase, $this->useCases[$commandClass], $commandClass);
+        }
+
         $this->useCases[$commandClass] = $useCase;
+    }
+
+    /**
+     *
+     * @param UseCaseSubscriber $useCase
+     */
+    public function registerUseCase(UseCaseSubscriber $useCase)
+    {
+        foreach (array_keys($useCase->register()) as $class) {
+            $this->registerCommand($class, $useCase);
+        }
     }
 
     /**
      *
      * @param  CommandInterface $command
      * @return ResponseInterface
-     * @throws \Exception
+     * @throws Exception
      */
     public function execute(CommandInterface $command)
     {
@@ -66,7 +88,7 @@ class Dispatcher implements DispatcherInterface
             $response = $useCase->run($command);
 
             if (!$response instanceof ResponseInterface) {
-                throw new Exception\Exception(); // todo add message!
+                throw new Exception\InvalidResponseException($command, $response);
             }
 
             $event = new Event\PostCommandEvent($command, $response);
