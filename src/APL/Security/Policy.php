@@ -20,7 +20,7 @@ interface Policy
     /**
      *
      * @param  Command $command
-     * @return mixed
+     * @return bool
      */
     public function check(Command $command);
 }
