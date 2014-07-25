@@ -44,9 +44,9 @@ class DuplicateUseCaseException extends Exception
      */
     public function __construct(UseCaseInterface $alreadyRegisteredUseCase, UseCaseInterface $duplicatedUseCase, $commandClass)
     {
-        $this->firstUseCase      = $alreadyRegisteredUseCase;
-        $this->duplicatedUseCase = $duplicatedUseCase;
-        $this->commandClass      = $commandClass;
+        $this->alreadyRegisteredUseCase = $alreadyRegisteredUseCase;
+        $this->duplicatedUseCase        = $duplicatedUseCase;
+        $this->commandClass             = $commandClass;
     }
 
     /**

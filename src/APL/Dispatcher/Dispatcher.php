@@ -141,7 +141,7 @@ class Dispatcher implements DispatcherInterface
     /**
      *
      * @param CommandInterface $command
-     * @param \Exception $exception
+     * @param \Exception       $exception
      */
     protected function exception(CommandInterface $command, \Exception $exception)
     {
@@ -157,13 +157,13 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface $command
+     * @param CommandInterface  $command
      * @param ResponseInterface $response
      * @return ResponseInterface
      */
     protected function terminate(CommandInterface $command, ResponseInterface $response)
     {
-        $event = new Event\TerminateEvent($response);
+        $event = new Event\TerminateEvent($command, $response);
         $this->eventDispatcher->dispatch(Event\Events::TERMINATE, $event);
 
         return $event->getResponse();
