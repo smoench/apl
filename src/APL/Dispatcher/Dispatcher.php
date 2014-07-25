@@ -80,29 +80,89 @@ class Dispatcher implements DispatcherInterface
     public function execute(CommandInterface $command)
     {
         try {
-            $event = new Event\PreCommandEvent($command);
-            $this->eventDispatcher->dispatch(Event\Events::PRE_COMMAND, $event);
 
-            $command  = $event->getCommand();
-            $useCase  = $this->resolveUseCase($command);
-            $response = $useCase->run($command);
+            $command  = $this->preCommand($command);
+            $response = $this->doExecute($command);
+            $response = $this->postCommand($command, $response);
 
-            if (!$response instanceof ResponseInterface) {
-                throw new Exception\InvalidResponseException($command, $response);
-            }
-
-            $event = new Event\PostCommandEvent($command, $response);
-            $this->eventDispatcher->dispatch(Event\Events::POST_COMMAND, $event);
-            $response = $event->getResponse();
         } catch (\Exception $exception) {
-            $event = new Event\ExceptionEvent($command, $exception);
-            $this->eventDispatcher->dispatch(Event\Events::EXCEPTION, $event);
 
-            if (!($response = $event->getResponse())) {
-                throw $exception;
-            }
+            $response = $this->exception($command, $exception);
+
         }
 
+        return $this->terminate($command, $response);
+    }
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @return ResponseInterface
+     */
+    protected function doExecute(CommandInterface $command)
+    {
+        $useCase  = $this->resolveUseCase($command);
+        $response = $useCase->run($command);
+
+        if (!$response instanceof ResponseInterface) {
+            throw new Exception\InvalidResponseException($command, $response);
+        }
+
+        return $response;
+    }
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @return CommandInterface
+     */
+    protected function preCommand(CommandInterface $command)
+    {
+        $event = new Event\PreCommandEvent($command);
+        $this->eventDispatcher->dispatch(Event\Events::PRE_COMMAND, $event);
+
+        return $event->getCommand();
+    }
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    protected function postCommand(CommandInterface $command, ResponseInterface $response)
+    {
+        $event = new Event\PostCommandEvent($command, $response);
+        $this->eventDispatcher->dispatch(Event\Events::POST_COMMAND, $event);
+
+        return $event->getResponse();
+    }
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @param \Exception $exception
+     */
+    protected function exception(CommandInterface $command, \Exception $exception)
+    {
+        $event = new Event\ExceptionEvent($command, $exception);
+        $this->eventDispatcher->dispatch(Event\Events::EXCEPTION, $event);
+
+        if (!($response = $event->getResponse())) {
+            throw $exception;
+        }
+
+        return $response;
+    }
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @param ResponseInterface $response
+     * @return ResponseInterface
+     */
+    protected function terminate(CommandInterface $command, ResponseInterface $response)
+    {
         $event = new Event\TerminateEvent($response);
         $this->eventDispatcher->dispatch(Event\Events::TERMINATE, $event);
 
