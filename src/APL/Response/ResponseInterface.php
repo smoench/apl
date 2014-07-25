@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace APL;
+namespace APL\Response;
 
 /**
  *
  */
-interface Command
+interface ResponseInterface
 {
 }

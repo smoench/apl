@@ -10,11 +10,11 @@
 
 namespace APL\Dispatcher;
 
-use APL\Command;
 use APL\Event;
 use APL\Exception;
-use APL\Response;
-use APL\UseCase;
+use APL\Command\CommandInterface;
+use APL\Response\ResponseInterface;
+use APL\UseCase\UseCaseInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -27,7 +27,7 @@ class Dispatcher implements DispatcherInterface
     /** @var $eventDispatcher */
     private $eventDispatcher;
 
-    /** @var UseCase[] */
+    /** @var UseCaseInterface[] */
     private $useCases = array();
 
     /**
@@ -42,20 +42,20 @@ class Dispatcher implements DispatcherInterface
     /**
      *
      * @param string $commandClass
-     * @param UseCase $useCase
+     * @param UseCaseInterface $useCase
      */
-    public function registerCommand($commandClass, UseCase $useCase)
+    public function registerCommand($commandClass, UseCaseInterface $useCase)
     {
         $this->useCases[$commandClass] = $useCase;
     }
 
     /**
      *
-     * @param  Command $command
-     * @return Response
+     * @param  CommandInterface $command
+     * @return ResponseInterface
      * @throws \Exception
      */
-    public function execute(Command $command)
+    public function execute(CommandInterface $command)
     {
         try {
             $event = new Event\PreCommandEvent($command);
@@ -65,7 +65,7 @@ class Dispatcher implements DispatcherInterface
             $useCase  = $this->resolveUseCase($command);
             $response = $useCase->run($command);
 
-            if (!$response instanceof Response) {
+            if (!$response instanceof ResponseInterface) {
                 throw new Exception\Exception(); // todo add message!
             }
 
@@ -89,11 +89,11 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param  Command $command
-     * @throws \APL\Exception\UseCaseNotFoundException
-     * @return UseCase
+     * @param  CommandInterface $command
+     * @throws Exception\UseCaseNotFoundException
+     * @return UseCaseInterface
      */
-    protected function resolveUseCase(Command $command)
+    protected function resolveUseCase(CommandInterface $command)
     {
         $class = get_class($command);
 

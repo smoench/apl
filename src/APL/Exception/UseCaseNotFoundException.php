@@ -10,7 +10,7 @@
 
 namespace APL\Exception;
 
-use APL\Command;
+use APL\Command\CommandInterface;
 
 /**
  *
@@ -20,22 +20,22 @@ class UseCaseNotFoundException extends Exception
 {
     /**
      *
-     * @var Command
+     * @var CommandInterface
      */
     protected $command;
 
     /**
      *
-     * @param Command $command
+     * @param CommandInterface $command
      */
-    public function __construct(Command $command)
+    public function __construct(CommandInterface $command)
     {
         $this->command = $command;
     }
 
     /**
      *
-     * @return Command
+     * @return CommandInterfacee
      */
     public function getCommand()
     {

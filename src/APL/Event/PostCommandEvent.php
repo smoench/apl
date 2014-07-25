@@ -10,32 +10,32 @@
 
 namespace APL\Event;
 
-use APL\Command;
-use APL\Response;
+use APL\Command\CommandInterface;
+use APL\Response\ResponseInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class PostCommandEvent extends Event
 {
-    /** @var Command */
+    /** @var CommandInterface */
     private $command;
 
-    /** @var Response */
+    /** @var ResponseInterface */
     private $response;
 
     /**
      *
-     * @param Command  $command
-     * @param Response $response
+     * @param CommandInterface  $command
+     * @param ResponseInterface $response
      */
-    public function __construct(Command $command, Response $response)
+    public function __construct(CommandInterface $command, ResponseInterface $response)
     {
-        $this->command = $command;
+        $this->command  = $command;
         $this->response = $response;
     }
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {
@@ -44,7 +44,7 @@ class PostCommandEvent extends Event
 
     /**
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {

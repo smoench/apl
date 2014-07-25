@@ -10,26 +10,26 @@
 
 namespace APL\Event;
 
-use APL\Command;
+use APL\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class PreCommandEvent extends Event
 {
-    /** @var Command */
+    /** @var CommandInterface */
     private $command;
 
     /**
      *
-     * @param Command $command
+     * @param CommandInterface $command
      */
-    public function __construct(Command $command)
+    public function __construct(CommandInterface $command)
     {
         $this->command = $command;
     }
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {

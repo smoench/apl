@@ -10,17 +10,17 @@
 
 namespace APL\Security;
 
-use APL\Command;
+use APL\Command\CommandInterface;
 
 /**
  *
  */
-interface Policy
+interface PolicyInterface
 {
     /**
      *
-     * @param  Command $command
+     * @param  CommandInterface $command
      * @return bool
      */
-    public function check(Command $command);
+    public function check(CommandInterface $command);
 }
