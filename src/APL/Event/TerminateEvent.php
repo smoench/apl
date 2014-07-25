@@ -11,7 +11,7 @@
 namespace APL\Event;
 
 use APL\Response\ResponseInterface;
-use APL\Response\CommandInterface;
+use APL\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
