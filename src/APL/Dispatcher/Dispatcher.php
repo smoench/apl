@@ -15,7 +15,7 @@ use APL\Exception;
 use APL\Command\CommandInterface;
 use APL\Response\ResponseInterface;
 use APL\UseCase\UseCaseInterface;
-use APL\UseCase\UseCaseCollection;
+use APL\UseCase\AbstractUseCaseCollection;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -62,9 +62,9 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param UseCaseSubscriber $useCase
+     * @param AbstractUseCaseSubscriber $useCase
      */
-    public function registerUseCase(UseCaseCollection $useCase)
+    public function registerUseCase(AbstractUseCaseCollection $useCase)
     {
         foreach (array_keys($useCase->register()) as $class) {
             $this->registerCommand($class, $useCase);

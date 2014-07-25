@@ -22,7 +22,7 @@ class DuplicateUseCaseException extends Exception
      *
      * @var UseCase
      */
-    protected $fistUseCase;
+    protected $firstUseCase;
 
     /**
      *
@@ -38,13 +38,13 @@ class DuplicateUseCaseException extends Exception
 
     /**
      *
-     * @param UseCase $fistUseCase
+     * @param UseCase $firstUseCase
      * @param UseCase $secondUseCase
      * @param string  $commandClass
      */
-    public function __construct(UseCase $fistUseCase, UseCase $secondUseCase, $commandClass)
+    public function __construct(UseCase $firstUseCase, UseCase $secondUseCase, $commandClass)
     {
-        $this->fistUseCase   = $fistUseCase;
+        $this->firstUseCase  = $firstUseCase;
         $this->secondUseCase = $secondUseCase;
         $this->commandClass  = $commandClass;
     }
@@ -53,9 +53,9 @@ class DuplicateUseCaseException extends Exception
      *
      * @return UseCase
      */
-    public function getFistUseCase()
+    public function getFirstUseCase()
     {
-        return $this->fistUseCase;
+        return $this->firstUseCase;
     }
 
     /**

@@ -3,12 +3,13 @@
 namespace APL;
 
 use APL\Exception\MethodNotFoundException;
+use APL\Command\CommandInterface;
 
 /**
  *
  * @author David Badura <d.a.badura@gmail.com>
  */
-abstract class UseCaseCollection implements UseCase
+abstract class AbstractUseCaseCollection implements UseCaseInterface
 {
 
     /**
@@ -28,9 +29,9 @@ abstract class UseCaseCollection implements UseCase
     /**
      *
      * @param Command $command
-     * @return Response
+     * @return APL\Response\ResponseInterface
      */
-    public function run(Command $command)
+    public function run(CommandInterface $command)
     {
         $mapping = $this->register();
         $method  = $mapping[get_class($command)];
