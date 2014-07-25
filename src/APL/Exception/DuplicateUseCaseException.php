@@ -22,13 +22,13 @@ class DuplicateUseCaseException extends Exception
      *
      * @var UseCaseInterface
      */
-    protected $firstUseCase;
+    protected $alreadyRegisteredUseCase;
 
     /**
      *
      * @var UseCaseInterface
      */
-    protected $secondUseCase;
+    protected $duplicatedUseCase;
 
     /**
      *
@@ -38,33 +38,33 @@ class DuplicateUseCaseException extends Exception
 
     /**
      *
-     * @param UseCaseInterface $firstUseCase
-     * @param UseCaseInterface $secondUseCase
+     * @param UseCaseInterface $alreadyRegisteredUseCase
+     * @param UseCaseInterface $duplicatedUseCase
      * @param string           $commandClass
      */
-    public function __construct(UseCaseInterface $firstUseCase, UseCaseInterface $secondUseCase, $commandClass)
+    public function __construct(UseCaseInterface $alreadyRegisteredUseCase, UseCaseInterface $duplicatedUseCase, $commandClass)
     {
-        $this->firstUseCase  = $firstUseCase;
-        $this->secondUseCase = $secondUseCase;
-        $this->commandClass  = $commandClass;
+        $this->firstUseCase      = $alreadyRegisteredUseCase;
+        $this->duplicatedUseCase = $duplicatedUseCase;
+        $this->commandClass      = $commandClass;
     }
 
     /**
      *
      * @return UseCaseInterface
      */
-    public function getFirstUseCase()
+    public function getAlreadyRegisteredUseCase()
     {
-        return $this->firstUseCase;
+        return $this->alreadyRegisteredUseCase;
     }
 
     /**
      *
      * @return UseCaseInterface
      */
-    public function getSecondUseCase()
+    public function getDuplicatedUseCase()
     {
-        return $this->secondUseCase;
+        return $this->duplicatedUseCase;
     }
 
     /**
