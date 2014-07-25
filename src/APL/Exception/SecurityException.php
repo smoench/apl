@@ -10,8 +10,8 @@
 
 namespace APL\Exception;
 
-use APL\Command;
-use APL\Security\Policy;
+use APL\Command\CommandInterface;
+use APL\Security\PolicyInterface;
 
 /**
  *
@@ -21,22 +21,22 @@ class SecurityException extends Exception
 {
     /**
      *
-     * @var Command
+     * @var CommandInterface
      */
     protected $command;
 
     /**
      *
-     * @var Policy
+     * @var PolicyInterface
      */
     protected $policy;
 
     /**
      *
-     * @param Command $command
-     * @param Policy $policy
+     * @param CommandInterface $command
+     * @param PolicyInterface $policy
      */
-    public function __construct(Command $command, Policy $policy)
+    public function __construct(CommandInterface $command, PolicyInterface $policy)
     {
         $this->command = $command;
         $this->policy  = $policy;
@@ -44,7 +44,7 @@ class SecurityException extends Exception
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {
@@ -53,7 +53,7 @@ class SecurityException extends Exception
 
     /**
      *
-     * @return Policy
+     * @return PolicyInterface
      */
     public function getPolicy()
     {
