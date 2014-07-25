@@ -8,7 +8,7 @@ use APL\Exception\MethodNotFoundException;
  *
  * @author David Badura <d.a.badura@gmail.com>
  */
-abstract class UseCaseSubscriber
+abstract class UseCaseCollection implements UseCase
 {
 
     /**
