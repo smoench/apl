@@ -8,16 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace APL;
+namespace APL\Command;
 
 /**
  *
  */
-interface UseCase
+interface CommandInterface
 {
-    /**
-     * @param  Command $command
-     * @return Response
-     */
-    public function run(Command $command);
 }

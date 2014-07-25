@@ -22,22 +22,22 @@ class SecurityListener
 {
     /**
      *
-     * @var Policy[]
+     * @var PolicyInterface[]
      */
     protected $polices = array();
 
     /**
      *
-     * @param Policy $policy
+     * @param PolicyInterface $policy
      */
-    public function addPolicy(Policy $policy)
+    public function addPolicy(PolicyInterface $policy)
     {
         $this->polices[] = $policy;
     }
 
     /**
      *
-     * @param \APL\Event\PreCommandEvent $event
+     * @param PreCommandEvent $event
      */
     public function preCommand(PreCommandEvent $event)
     {

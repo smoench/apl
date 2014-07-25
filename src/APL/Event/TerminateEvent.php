@@ -10,7 +10,7 @@
 
 namespace APL\Event;
 
-use APL\Response;
+use APL\Response\ResponseInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -19,30 +19,30 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class TerminateEvent extends Event
 {
-    /** @var Response */
+    /** @var ResponseInterface */
     private $response;
 
     /**
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function __construct(Response $response)
+    public function __construct(ResponseInterface $response)
     {
         $this->response = $response;
     }
 
     /**
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function setResponse(Response $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
     }
 
     /**
      *
-     * @return Response
+     * @return ResponseInterface
      */
     public function getResponse()
     {

@@ -10,27 +10,28 @@
 
 namespace APL\Event;
 
-use APL\Command;
-use APL\Response;
+use Exception;
+use APL\Command\CommandInterface;
+use APL\Response\ResponseInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 class ExceptionEvent extends Event
 {
-    /** @var Command */
+    /** @var CommandInterface */
     private $command;
 
-    /** @var \Exception */
+    /** @var Exception */
     private $exception;
 
-    /** @var Response|null */
+    /** @var ResponseInterface|null */
     private $response = null;
 
     /**
      *
-     * @param Command    $command
-     * @param \Exception $exception
+     * @param CommandInterface $command
+     * @param Exception $exception
      */
-    public function __construct(Command $command, \Exception $exception)
+    public function __construct(CommandInterface $command, Exception $exception)
     {
         $this->command   = $command;
         $this->exception = $exception;
@@ -38,7 +39,7 @@ class ExceptionEvent extends Event
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {
@@ -47,7 +48,7 @@ class ExceptionEvent extends Event
 
     /**
      *
-     * @return \Exception
+     * @return Exception
      */
     public function getException()
     {
@@ -56,7 +57,7 @@ class ExceptionEvent extends Event
 
     /**
      *
-     * @return Response|null
+     * @return ResponseInterface|null
      */
     public function getResponse()
     {
@@ -65,9 +66,9 @@ class ExceptionEvent extends Event
 
     /**
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function setResponse(Response $response)
+    public function setResponse(ResponseInterface $response)
     {
         $this->response = $response;
     }

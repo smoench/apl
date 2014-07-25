@@ -36,7 +36,7 @@ class SecurityListenerTest extends \PHPUnit_Framework_TestCase
      */
     private function createPreCommandEvent()
     {
-        return new PreCommandEvent($this->getMock('APL\Command'));
+        return new PreCommandEvent($this->getMock('APL\Command\CommandInterface'));
     }
 
     /**
@@ -46,7 +46,7 @@ class SecurityListenerTest extends \PHPUnit_Framework_TestCase
      */
     private function createFakePolicy($return)
     {
-        $policy = $this->getMock('APL\Security\Policy');
+        $policy = $this->getMock('APL\Security\PolicyInterface');
         $policy
             ->expects($this->once())
             ->method('check')
