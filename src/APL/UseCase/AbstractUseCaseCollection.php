@@ -9,7 +9,7 @@ use APL\Command\CommandInterface;
  *
  * @author David Badura <d.a.badura@gmail.com>
  */
-abstract class AbstractUseCaseCollection implements UseCaseInterface
+abstract class AbstractUseCaseCollection implements UseCaseCollectionInterface
 {
 
     /**
