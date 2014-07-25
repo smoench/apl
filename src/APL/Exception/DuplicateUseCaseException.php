@@ -10,7 +10,7 @@
 
 namespace APL\Exception;
 
-use APL\UseCase;
+use APL\UseCase\UseCaseInterface;
 
 /**
  *
@@ -20,13 +20,13 @@ class DuplicateUseCaseException extends Exception
 {
     /**
      *
-     * @var UseCase
+     * @var UseCaseInterface
      */
     protected $firstUseCase;
 
     /**
      *
-     * @var UseCase
+     * @var UseCaseInterface
      */
     protected $secondUseCase;
 
@@ -38,11 +38,11 @@ class DuplicateUseCaseException extends Exception
 
     /**
      *
-     * @param UseCase $firstUseCase
-     * @param UseCase $secondUseCase
-     * @param string  $commandClass
+     * @param UseCaseInterface $firstUseCase
+     * @param UseCaseInterface $secondUseCase
+     * @param string           $commandClass
      */
-    public function __construct(UseCase $firstUseCase, UseCase $secondUseCase, $commandClass)
+    public function __construct(UseCaseInterface $firstUseCase, UseCaseInterface $secondUseCase, $commandClass)
     {
         $this->firstUseCase  = $firstUseCase;
         $this->secondUseCase = $secondUseCase;
@@ -51,7 +51,7 @@ class DuplicateUseCaseException extends Exception
 
     /**
      *
-     * @return UseCase
+     * @return UseCaseInterface
      */
     public function getFirstUseCase()
     {
@@ -60,7 +60,7 @@ class DuplicateUseCaseException extends Exception
 
     /**
      *
-     * @return UseCase
+     * @return UseCaseInterface
      */
     public function getSecondUseCase()
     {

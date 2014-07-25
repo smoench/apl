@@ -10,8 +10,8 @@
 
 namespace APL\Exception;
 
-use APL\Command;
-use APL\UseCase;
+use APL\Command\CommandInterface;
+use APL\UseCase\UseCaseInterface;
 
 /**
  *
@@ -21,13 +21,13 @@ class MethodNotFoundException extends Exception
 {
     /**
      *
-     * @var Command
+     * @var CommandInterface
      */
     protected $command;
 
     /**
      *
-     * @var UseCase
+     * @var UseCaseInterface
      */
     protected $useCase;
 
@@ -39,11 +39,11 @@ class MethodNotFoundException extends Exception
 
     /**
      *
-     * @param Command $command
-     * @param UseCase $useCase
-     * @param string  $method
+     * @param CommandInterface $command
+     * @param UseCaseInterface $useCase
+     * @param string           $method
      */
-    public function __construct(Command $command, UseCase $useCase, $method)
+    public function __construct(CommandInterface $command, UseCaseInterface $useCase, $method)
     {
         $this->command = $command;
         $this->useCase = $useCase;
@@ -52,7 +52,7 @@ class MethodNotFoundException extends Exception
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {
@@ -61,7 +61,7 @@ class MethodNotFoundException extends Exception
 
     /**
      *
-     * @return UseCase
+     * @return UseCaseInterface
      */
     public function getUseCase()
     {

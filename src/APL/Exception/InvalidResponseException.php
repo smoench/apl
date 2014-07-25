@@ -10,7 +10,7 @@
 
 namespace APL\Exception;
 
-use APL\Command;
+use APL\Command\CommandInterface;
 
 /**
  *
@@ -20,7 +20,7 @@ class InvalidResponseException extends Exception
 {
     /**
      *
-     * @var Command
+     * @var CommandInterface
      */
     protected $command;
 
@@ -32,10 +32,10 @@ class InvalidResponseException extends Exception
 
     /**
      *
-     * @param Command $command
+     * @param CommandInterface $command
      * @param mixed $response
      */
-    public function __construct(Command $command, $response)
+    public function __construct(CommandInterface $command, $response)
     {
         $this->command  = $command;
         $this->response = $response;
@@ -43,7 +43,7 @@ class InvalidResponseException extends Exception
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCommand()
     {
