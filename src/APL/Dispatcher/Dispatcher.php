@@ -27,7 +27,7 @@ class Dispatcher implements DispatcherInterface
 {
     /**
      *
-     * @var $eventDispatcher
+     * @var $eventDispatcherInterface
      */
     private $eventDispatcher;
 
@@ -54,7 +54,7 @@ class Dispatcher implements DispatcherInterface
     public function registerCommand($commandClass, UseCaseInterface $useCase)
     {
         if (isset($this->useCases[$commandClass])) {
-            throw new Exception\DuplicateUseCaseException($useCase, $this->useCases[$commandClass], $commandClass);
+            throw new Exception\DuplicateUseCaseException($this->useCases[$commandClass], $useCase, $commandClass);
         }
 
         $this->useCases[$commandClass] = $useCase;
@@ -75,7 +75,7 @@ class Dispatcher implements DispatcherInterface
      *
      * @param  CommandInterface $command
      * @return ResponseInterface
-     * @throws Exception
+     * @throws \Exception
      */
     public function execute(CommandInterface $command)
     {
@@ -112,8 +112,8 @@ class Dispatcher implements DispatcherInterface
     /**
      *
      * @param  CommandInterface $command
-     * @throws Exception\UseCaseNotFoundException
      * @return UseCaseInterface
+     * @throws Exception\UseCaseNotFoundException
      */
     protected function resolveUseCase(CommandInterface $command)
     {
