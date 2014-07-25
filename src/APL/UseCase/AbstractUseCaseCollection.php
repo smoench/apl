@@ -28,7 +28,7 @@ abstract class AbstractUseCaseCollection implements UseCaseCollectionInterface
 
     /**
      *
-     * @param Command $command
+     * @param CommandInterface $command
      * @return APL\Response\ResponseInterface
      */
     public function run(CommandInterface $command)

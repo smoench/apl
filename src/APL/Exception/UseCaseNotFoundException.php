@@ -35,7 +35,7 @@ class UseCaseNotFoundException extends Exception
 
     /**
      *
-     * @return CommandInterfacee
+     * @return CommandInterface
      */
     public function getCommand()
     {
