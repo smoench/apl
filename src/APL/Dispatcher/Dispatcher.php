@@ -48,7 +48,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param string $commandClass
+     * @param string           $commandClass
      * @param UseCaseInterface $useCase
      */
     public function registerCommand($commandClass, UseCaseInterface $useCase)
@@ -64,7 +64,7 @@ class Dispatcher implements DispatcherInterface
      *
      * @param UseCaseCollectionInterface $useCase
      */
-    public function registerUseCase(UseCaseCollectionInterface $useCase)
+    public function registerUseCaseCollection(UseCaseCollectionInterface $useCase)
     {
         foreach (array_keys($useCase->register()) as $class) {
             $this->registerCommand($class, $useCase);
@@ -96,7 +96,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface $command
+     * @param  CommandInterface  $command
      * @return ResponseInterface
      */
     protected function doExecute(CommandInterface $command)
@@ -113,7 +113,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface $command
+     * @param  CommandInterface $command
      * @return CommandInterface
      */
     protected function preCommand(CommandInterface $command)
@@ -126,8 +126,8 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface $command
-     * @param ResponseInterface $response
+     * @param  CommandInterface  $command
+     * @param  ResponseInterface $response
      * @return ResponseInterface
      */
     protected function postCommand(CommandInterface $command, ResponseInterface $response)
@@ -140,8 +140,9 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface $command
-     * @param \Exception       $exception
+     * @param  CommandInterface  $command
+     * @param  \Exception        $exception
+     * @return ResponseInterface
      */
     protected function exception(CommandInterface $command, \Exception $exception)
     {
@@ -157,8 +158,8 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param CommandInterface  $command
-     * @param ResponseInterface $response
+     * @param  CommandInterface  $command
+     * @param  ResponseInterface $response
      * @return ResponseInterface
      */
     protected function terminate(CommandInterface $command, ResponseInterface $response)
@@ -171,7 +172,7 @@ class Dispatcher implements DispatcherInterface
 
     /**
      *
-     * @param  CommandInterface $command
+     * @param  CommandInterface                   $command
      * @return UseCaseInterface
      * @throws Exception\UseCaseNotFoundException
      */
