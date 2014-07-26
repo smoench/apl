@@ -66,6 +66,6 @@ class CommandStackTest extends \PHPUnit_Framework_TestCase
      */
     protected function createCommand()
     {
-        return $this->getMock('APL\Command');
+        return $this->getMock('APL\Command\CommandInterface');
     }
 }

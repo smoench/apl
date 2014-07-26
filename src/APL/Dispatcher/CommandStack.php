@@ -10,7 +10,7 @@
 
 namespace APL\Dispatcher;
 
-use APL\Command;
+use APL\Command\CommandInterface;
 
 /**
  *
@@ -21,22 +21,22 @@ class CommandStack
 
     /**
      *
-     * @var Command[]
+     * @var CommandInterface[]
      */
     private $commands = array();
 
     /**
      *
-     * @param Command $command
+     * @param CommandInterface $command
      */
-    public function push(Command $command)
+    public function push(CommandInterface $command)
     {
         $this->commands[] = $command;
     }
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function pop()
     {
@@ -49,7 +49,7 @@ class CommandStack
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getCurrentCommand()
     {
@@ -58,7 +58,7 @@ class CommandStack
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getMasterCommand()
     {
@@ -71,7 +71,7 @@ class CommandStack
 
     /**
      *
-     * @return Command
+     * @return CommandInterface
      */
     public function getParentCommand()
     {
