@@ -30,13 +30,18 @@ class Dispatcher implements DispatcherInterface
     /** @var UseCaseInterface[] */
     private $useCases = array();
 
+    /** @var CommandStack */
+    private $commandStack;
+
     /**
      *
      * @param EventDispatcherInterface $eventDispatcher
+     * @param CommandStack $commandStack
      */
-    public function __construct(EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher, CommandStack $commandStack = null)
     {
         $this->eventDispatcher = $eventDispatcher;
+        $this->commandStack    = $commandStack ?: new CommandStack();
     }
 
     /**
@@ -57,6 +62,8 @@ class Dispatcher implements DispatcherInterface
      */
     public function execute(CommandInterface $command)
     {
+        $this->commandStack->push($command);
+
         try {
             $event = new Event\PreCommandEvent($command);
             $this->eventDispatcher->dispatch(Event\Events::PRE_COMMAND, $event);
@@ -83,6 +90,8 @@ class Dispatcher implements DispatcherInterface
 
         $event = new Event\TerminateEvent($response);
         $this->eventDispatcher->dispatch(Event\Events::TERMINATE, $event);
+
+        $this->commandStack->pop();
 
         return $event->getResponse();
     }
