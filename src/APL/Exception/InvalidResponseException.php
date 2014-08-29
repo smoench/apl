@@ -16,7 +16,7 @@ use APL\Command\CommandInterface;
  *
  * @author David Badura <d.a.badura@gmail.com>
  */
-class UseCaseNotFoundException extends Exception
+class InvalidResponseException extends Exception
 {
     /**
      *
@@ -26,11 +26,19 @@ class UseCaseNotFoundException extends Exception
 
     /**
      *
-     * @param CommandInterface $command
+     * @var mixed
      */
-    public function __construct(CommandInterface $command)
+    protected $response;
+
+    /**
+     *
+     * @param CommandInterface $command
+     * @param mixed $response
+     */
+    public function __construct(CommandInterface $command, $response)
     {
-        $this->command = $command;
+        $this->command  = $command;
+        $this->response = $response;
     }
 
     /**
@@ -40,5 +48,14 @@ class UseCaseNotFoundException extends Exception
     public function getCommand()
     {
         return $this->command;
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }

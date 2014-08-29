@@ -42,7 +42,7 @@ class SecurityListenerTest extends \PHPUnit_Framework_TestCase
     /**
      *
      * @param bool $return
-     * @return \APL\Security\Policy
+     * @return \APL\Security\PolicyInterface
      */
     private function createFakePolicy($return)
     {

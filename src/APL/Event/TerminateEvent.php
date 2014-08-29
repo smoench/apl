@@ -11,6 +11,7 @@
 namespace APL\Event;
 
 use APL\Response\ResponseInterface;
+use APL\Command\CommandInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
@@ -19,16 +20,30 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class TerminateEvent extends Event
 {
+    /** @var CommandInterface */
+    private $command;
+
     /** @var ResponseInterface */
     private $response;
 
     /**
      *
+     * @param CommandInterface  $command
      * @param ResponseInterface $response
      */
-    public function __construct(ResponseInterface $response)
+    public function __construct(CommandInterface $command, ResponseInterface $response)
     {
+        $this->command  = $command;
         $this->response = $response;
+    }
+
+    /**
+     *
+     * @param CommandInterface
+     */
+    public function getCommand()
+    {
+        return $this->command;
     }
 
     /**
