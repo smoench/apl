@@ -21,7 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "APL\\": "src/"
+            "APL\\": "src/APL/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "APL\\Tests\\": "tests/APL/"
         }
     }
 }
